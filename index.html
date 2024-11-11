@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealership</title>
+    <link rel="icon" href="photos/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #98fb98; /* Change this to your desired color */
+            
+        }
+        header {
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Vertically center items */
+            justify-content: space-between; /* Space between logo and navbar */
+            padding: 20px; /* Padding around the header */
+        }
+        
+        header img {
+            height: 50px; /* Adjust logo height */
+            margin-right: 15px; /* Space between logo and text */
+        }
+
+        h1 {
+            margin: 0; /* Remove default margin */
+            font-size: 24px; /* Adjust font size */
+        }
+
+        /* Navbar styles */
+        nav {
+            background-color: #; /* Dark background for the navbar */
+            color: #000000; /* White text color */
+            margin-left: auto; /* Pushes the navbar to the right */
+        }
+        
+        nav ul {
+            list-style-type: none; /* Removes bullet points */
+            display: flex; /* Displays list items in a row */
+            padding: 0; /* Removes padding */
+            margin: 0; /* Removes margin */
+        }
+
+        nav ul li {
+            position: relative; /* Enable absolute positioning for the ::after element */
+        }
+        
+        nav ul li a {
+            color: #3e2723; /* Link color */
+            text-decoration: none; /* Removes underline from links */
+            padding: 10px 15px; /* Padding around links */
+            transition: color 0.3s; /* Smooth transition for text color */
+        }
+        
+        nav ul li a:hover {
+            color: #ffcccb; /* Optionally change text color on hover */
+        }
+        
+        nav ul li a::after {
+            content: ''; /* Required to create an element */
+            display: block; /* Makes it a block element */
+            width: 100%; /* Full width of the link */
+            height: 2px; /* Thickness of the line */
+            background-color: white; /* Color of the line */
+            position: absolute; /* Position relative to the li */
+            left: 0; /* Align to the left */
+            bottom: -5px; /* Position it below the link */
+            transform: scaleX(0); /* Start with no width */
+            transition: transform 0.3s; /* Smooth transition for the line */
+        }
+        
+        nav ul li a:hover::after {
+            transform: scaleX(1); /* Scale the line to full width on hover */
+        }
+        #showcase {
+            background-image: url('photos/showcase.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 75vh; /* Adjust height as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .highlight {
+            color: yellow; /* Example highlight color */
+        }
+        /* Cards Section */
+        #cards {
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-around; /* Space cards evenly */
+            padding: 20px; /* Padding around the cards section */
+        }
+
+        .card {
+            background-color: #f9f9f9; /* Light background for the card */
+            border: 1px solid #ccc; /* Border around the card */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Padding inside the card */
+            width: 30%; /* Width of each card */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            text-align: center; /* Center text in the card */
+            margin: 20px; /* Add margin to separate cards */
+            height: auto; /* Allow height to adjust based on content */
+            display: flex; /* Use flexbox for card content */
+            flex-direction: column; /* Allow vertical stacking of elements */
+            justify-content: space-between; /* Space elements within the card */
+        }
+
+        .card-image {
+            width: 100%; /* Make image take full width of the card */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px; /* Rounded corners for the image */
+            margin-bottom: 15px; /* Space below the image */
+        }
+
+        .card h2 {
+            color: #333; /* Dark color for the heading */
+        }
+
+        .card p {
+            color: #666; /* Lighter color for the paragraph */
+            flex-grow: 1; /* Allow the paragraph to grow to fill space */
+        }
+
+        .card-button {
+            display: inline-block; /* Display as a block for padding */
+            margin-top: 10px; /* Space above the button */
+            padding: 10px 15px; /* Padding around the button */
+            background-color: #333; /* Button background color */
+            color: white; /* Button text color */
+            text-decoration: none; /* No underline */
+            border-radius: 5px; /* Rounded corners for the button */
+        }
+
+        .card-button:hover {
+            background-color: #555; /* Darker background on hover */
+        }
+        footer {
+            background-color: #333; /* Dark background color */
+            color: white; /* White text color */
+            padding: 20px; /* Padding around the footer */
+            text-align: center; /* Center align text */
+        }
+        
+        .footer-content {
+            max-width: 1200px; /* Limit the width of the content */
+            margin: 0 auto; /* Center the content */
+        }
+        
+        footer nav ul {
+            list-style-type: none; /* Remove bullet points */
+            padding: 0; /* Remove padding */
+            margin: 10px 0 0; /* Margin for spacing */
+            display: flex; /* Use flexbox for layout */
+            justify-content: center; /* Center the links */
+        }
+        
+        footer nav ul li {
+            margin: 0 15px; /* Space between links */
+        }
+        
+        footer nav ul li a {
+            color: white; /* Link color */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s; /* Smooth color transition */
+        }
+        
+        footer nav ul li a:hover {
+            color: #ffcccb; /* Change color on hover */
+        }
+        /* Basic CSS for the hero section */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            height: 100vh; /* Full height of the viewport */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Cover the hero section */
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 2;
+            font-size: 3rem; /* Adjust size as needed */
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 2;
+            font-size: 1.5rem; /* Adjust size as needed */
+        }
+
+        .cta-button {
+            position: relative;
+            z-index: 2;
+            padding: 10px 20px;
+            background-color: #ff5733; /* Button color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #c70000; /* Darker shade on hover */
+        }
+        #gallery {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #f9f9f9; /* Light background for contrast */
+        }
+        
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .gallery-item {
+            position: relative;
+            margin: 10px;
+            overflow: hidden;
+            width: 300px; /* Adjust width as needed */
+            border-radius: 8px; /* Rounded corners */
+            transition: transform 0.3s; /* Smooth scaling effect */
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05); /* Scale up on hover */
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px; /* Rounded corners */
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s; /* Smooth transition */
+        }
+        
+        .gallery-item:hover .overlay {
+            opacity: 1; /* Show overlay on hover */
+        }
+
+        #search-filter {
+            padding: 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        
+        #search-filter form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        #search-filter input, 
+        #search-filter select {
+            margin: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        
+        #search-filter button {
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #search-filter button:hover {
+            background-color: #c70000;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="photos/logo.png" alt="Car Dealership Logo"> <!-- Replace with your logo path -->
+        <h1>Car Dealership</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#help">Help</a></li>
+                <li><a href="selling_car.php">Selling Car</a></li>
+                <li><a href="buying_car.php">Buying Car</a></li>
+                <li><a href="#about-us">About Us</a></li> <!-- Fixed duplicate ID -->
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="showcase">
+        <div class="container">
+            <h1><span class="highlight">Car Dealership</span> Real Deals</h1>
+            <p>Welcome to the official website of Car Dealership. Here, you can find information on our activities, notices, and the latest school news.</p>
+        </div>
+    </section>
+
+
+    <section id="cards">
+        <div class="card">
+            <img src="photos/sell-car.jpg" alt="Sell Your Car" class="card-image"> <!-- Replace with your image path -->
+            <h2>Sell Your Car</h2>
+            <p>Get the best price for your vehicle with our hassle-free selling process.</p>
+            <a href="#selling-car" class="card-button">Learn More</a>
+        </div>
+        <div class="card">
+            <img src="photos/buy-car.jpg" alt="Buy a Car" class="card-image"> <!-- Replace with your image path -->
+            <h2>Buy a Car</h2>
+            <p>Explore our wide range of vehicles and find the perfect one for you!</p>
+            <a href="#buying-car" class="card-button">Learn More</a>
+        </div>
+        <div class="card">
+            <img src="photos/support.jpg" alt="Customer Support" class="card-image"> <!-- Replace with your image path -->
+            <h2>Customer Support</h2>
+            <p>Need help? Our support team is here to assist you with any inquiries.</p>
+            <a href="#help" class="card-button">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <video autoplay muted loop>
+            <source src="videos/car.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1>Welcome to Our Website!</h1>
+        <p>Your success starts here</p>
+        <a href="#services" class="cta-button">Get Started</a>
+    </header>
+
+    <section id="gallery">
+        <h2>Past Inventory</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="images/car1.jpg" alt="Car 1">
+                <div class="overlay">
+                    <h3>Mercidece Benz</h3>
+                    <p>$20,000</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/car2.jpg" alt="Car 2">
+                <div class="overlay">
+                    <h3>BMW M3 series</h3>
+                    <p>$25,000</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/car3.jpg" alt="Car 3">
+                <div class="overlay">
+                    <h3>Honda Fit Hybrid</h3>
+                    <p>$6,000</p>
+                </div>
+            </div>
+            <!-- Add more gallery items as needed -->
+        </div>
+    </section>
+
+    <section id="search-filter">
+        <h2>Search Our Inventory</h2>
+        <form method="GET" action="search.php">
+            <input type="text" name="query" placeholder="Make or Model" />
+            <select name="type">
+                <option value="">All Types</option>
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Truck">Truck</option>
+                <!-- Add more types as needed -->
+            </select>
+            <input type="number" name="min_price" placeholder="Min Price" />
+            <input type="number" name="max_price" placeholder="Max Price" />
+            <input type="number" name="min_year" placeholder="Min Year" />
+            <input type="number" name="max_year" placeholder="Max Year" />
+            <button type="submit">Search</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Car Dealership. All rights reserved. &copy; Taku Code</p>
+            <nav>
+                <ul>
+                    <li><a href="#privacy-policy">Privacy Policy</a></li>
+                    <li><a href="#terms-of-service">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
